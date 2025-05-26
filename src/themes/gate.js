@@ -1,9 +1,75 @@
-export default {
-    extend: {
-        colors: {
-            background: '#1E1E2E',
-            primary: '#00CED1',
-            text: '#FFFFFF',
-        },
-    },
+import {vars} from 'nativewind';
+
+export const gate = {
+  light: vars({
+    '--color-primary': '#217A9A',
+    '--color-primary-surface': '#D8EDF4',
+    '--color-primary-border': '#A3D1E0',
+    '--color-primary-pressed': '#186380',
+    '--color-primary-focus': '#B2DDE8',
+
+    '--color-neutral-10': '#FFFFFF',
+    '--color-neutral-20': '#E8E8E8',
+    '--color-neutral-30': '#D1D1D1',
+    '--color-neutral-40': '#BABABA',
+    '--color-neutral-50': '#A3A3A3',
+    '--color-neutral-60': '#8C8C8C',
+    '--color-neutral-70': '#757575',
+    '--color-neutral-80': '#5E5E5E',
+    '--color-neutral-90': '#4D4D4D',
+    '--color-neutral-100': '#444444',
+
+    '--color-negative-primary': '#DB1F22',
+    '--color-negative-surface': '#FFEDED',
+    '--color-negative-border': '#F3D1D1',
+    '--color-negative-pressed': '#780709',
+
+    '--color-warning-primary': '#FFC107',
+    '--color-warning-surface': '#FFF7CD',
+    '--color-warning-border': '#FFED9B',
+    '--color-warning-pressed': '#B78103',
+
+    '--color-success-primary': '#00855B',
+    '--color-success-surface': '#E6EDEB',
+    '--color-success-border': '#C2D6CF',
+    '--color-success-pressed': '#004F36',
+
+    '--color-info-primary': '#0064D6',
+    '--color-info-surface': '#E5F0FF',
+    '--color-info-border': '#C9DCF2',
+    '--color-info-pressed': '#003878',
+
+    // Old colors
+    '--color-secondary': '#FFFFFF',
+    '--color-text-white': '#FFFFFF',
+    '--color-text-black': '#110f0fc7',
+    '--color-text-custom-gray': '#444444',
+    '--color-text-custom-green': '#6D8108',
+    '--color-secondary-text': '#BBBBBB',
+    '--color-custom-gray': '#D9D9D9',
+    '--color-overlay': 'rgba(0, 0, 0, 0.1)',
+    '--color-overlay-2': 'rgba(0,0,0, 0.85)',
+    '--color-shape-gray': '#444444',
+    '--color-shape-gray-1': '#E5E5E5',
+    '--color-shape-gray-2': '#b4b4b4',
+    '--color-shape-gray-3': '#cccccc',
+    '--color-shape-blue': '#007AFF',
+    '--color-shape-orange': '#E67817',
+    '--color-shape-orange-2': '#FEAA50',
+    '--color-shape-yellow': '#fffff0',
+    '--color-shape-yellow-1': '#FFD35E',
+    '--color-shape-red': '#CF0000',
+    '--color-shape-red-1': '#F57461',
+    '--color-shape-green': '#6d81084d',
+    '--color-shape-green-1': '#c5cd9c',
+    '--color-shape-green-2': '#c5DA58',
+    '--color-shape-green-3': '#6D8108',
+    '--color-shape-black': '#000000',
+    '--color-toast-border-success': '#15803d',
+    '--color-toast-background-success': '#4ADE80',
+    '--color-toast-border-danger': '#E21212',
+    '--color-toast-background-danger': '#F15C5C',
+    '--color-toast-border-info': '#173BFE',
+    '--color-toast-background-info': '#1E90FF',
+  }),
 };

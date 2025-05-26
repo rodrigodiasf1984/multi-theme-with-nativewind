@@ -1,33 +1,11 @@
+import './global.css';
 import React, { ReactNode } from 'react';
 import { Text, View, ViewProps } from 'react-native';
-import { vars, useColorScheme } from 'nativewind';
+import { useColorScheme } from 'nativewind';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ColorScheme, ThemeName, themes } from './src/themes/themes';
 
-type ThemeName = 'brand' | 'christmas';
-type ColorScheme = 'light' | 'dark';
 
-const themes: Record<ThemeName, Record<ColorScheme, object>> = {
-  brand: {
-    light: vars({
-      '--color-primary': 'black',
-      '--color-secondary': 'white',
-    }),
-    dark: vars({
-      '--color-primary': 'white',
-      '--color-secondary': 'black',
-    }),
-  },
-  christmas: {
-    light: vars({
-      '--color-primary': 'red',
-      '--color-secondary': 'green',
-    }),
-    dark: vars({
-      '--color-primary': 'green',
-      '--color-secondary': 'red',
-    }),
-  },
-};
 
 interface ThemeProps extends ViewProps {
   name: ThemeName;
@@ -37,6 +15,7 @@ interface ThemeProps extends ViewProps {
 const Theme: React.FC<ThemeProps> = ({ name, children, style, ...rest }) => {
   const { colorScheme = 'light' } = useColorScheme() || {};
   const themeStyle = themes[name][colorScheme as ColorScheme];
+  console.log('✅ ~  themeStyle:', themeStyle);
 
   return (
     <View style={[themeStyle, style]} {...rest}>
@@ -46,19 +25,17 @@ const Theme: React.FC<ThemeProps> = ({ name, children, style, ...rest }) => {
 };
 
 const App: React.FC = () => (
-  <SafeAreaView className="flex-1 items-center justify-center">
-    <Theme name="brand">
-      <View className="flex-1 items-center justify-center">
-        <Text className="text-primary">
-          test text black
-        </Text>
+  <SafeAreaView className="flex-1 mt-10">
+    <Theme name="gate">
+      <View className="items-center justify-center mb-4 bg-custom-gray h-10 w-10">
+        <Text className="text-primary">test text primary brand</Text>
+        <Text className="text-secondary">test text secondary brand</Text>
       </View>
     </Theme>
-    <Theme name="christmas">
-      <View>
-        <Text className="text-primary">
-          test text red
-        </Text>
+    <Theme name="parking">
+      <View className="items-center justify-center bg-primary">
+        <Text className="text-neutral">test text primary christmas</Text>
+        <Text className="text-secondary">test text secondary christmas</Text>
       </View>
     </Theme>
   </SafeAreaView>
