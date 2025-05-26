@@ -1,131 +1,67 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { ReactNode } from 'react';
+import { Text, View, ViewProps } from 'react-native';
+import { vars, useColorScheme } from 'nativewind';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+type ThemeName = 'brand' | 'christmas';
+type ColorScheme = 'light' | 'dark';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const themes: Record<ThemeName, Record<ColorScheme, object>> = {
+  brand: {
+    light: vars({
+      '--color-primary': 'black',
+      '--color-secondary': 'white',
+    }),
+    dark: vars({
+      '--color-primary': 'white',
+      '--color-secondary': 'black',
+    }),
+  },
+  christmas: {
+    light: vars({
+      '--color-primary': 'red',
+      '--color-secondary': 'green',
+    }),
+    dark: vars({
+      '--color-primary': 'green',
+      '--color-secondary': 'red',
+    }),
+  },
+};
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+interface ThemeProps extends ViewProps {
+  name: ThemeName;
+  children: ReactNode;
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  /*
-   * To keep the template simple and small we're adding padding to prevent view
-   * from rendering under the System UI.
-   * For bigger apps the recommendation is to use `react-native-safe-area-context`:
-   * https://github.com/AppAndFlow/react-native-safe-area-context
-   *
-   * You can read more about it here:
-   * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-   */
-  const safePadding = '5%';
+const Theme: React.FC<ThemeProps> = ({ name, children, style, ...rest }) => {
+  const { colorScheme = 'light' } = useColorScheme() || {};
+  const themeStyle = themes[name][colorScheme as ColorScheme];
 
   return (
-    <View style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header/>
-        </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <View style={[themeStyle, style]} {...rest}>
+      {children}
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const App: React.FC = () => (
+  <SafeAreaView className="flex-1 items-center justify-center">
+    <Theme name="brand">
+      <View className="flex-1 items-center justify-center">
+        <Text className="text-primary">
+          test text black
+        </Text>
+      </View>
+    </Theme>
+    <Theme name="christmas">
+      <View>
+        <Text className="text-primary">
+          test text red
+        </Text>
+      </View>
+    </Theme>
+  </SafeAreaView>
+);
 
 export default App;
